@@ -12,7 +12,7 @@ const url = "https://api.currencyscoop.com/v1/";
 router.get("/", async (req, res) => {
   // get all currencies
   await axios
-    .get(`${url}latest?base=SGD&api_key=${api_key}`)
+    .get(`${url}latest?base=${req.body.baseCurr}&api_key=${api_key}`)
     .then((response) => {
       if (response) {
         res.status(StatusCodes.OK).send(response.data);
@@ -31,7 +31,7 @@ router.get("/:reqCurr", async (req, res) => {
   await axios
     .all([
       await axios.get(
-        `${url}latest?base=SGD&symbols=${req.params.reqCurr}&api_key=${api_key}`
+        `${url}latest?base=${req.body.baseCurr}&symbols=${req.params.reqCurr}&api_key=${api_key}`
       ),
       await axios.get(`${url}currencies?type=fiat&api_key=${api_key}`),
     ])
@@ -88,7 +88,7 @@ router.get("/:reqCurr/history", async (req, res) => {
 
   const axiosCmd = (inputDate) => {
     return axios.get(
-      `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=${inputDate}&api_key=${api_key}`
+      `${url}historical?base=${req.body.baseCurr}&symbols=${req.params.reqCurr}&date=${inputDate}&api_key=${api_key}`
     );
   };
 
