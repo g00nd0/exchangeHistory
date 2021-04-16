@@ -19,27 +19,46 @@ router.get("/", async (req, res) => {
 
 router.get("/:reqCurr", async (req, res) => {
   //get one currency
+
   await axios
-    .get(
-      `${url}latest?base=SGD&symbols=${req.params.reqCurr}&api_key=${api_key}`
-    )
-    .then((response) => {
-      res.send(response.data);
-    });
+    .all([
+      await axios.get(
+        `${url}latest?base=SGD&symbols=${req.params.reqCurr}&api_key=${api_key}`
+      ),
+      await axios.get(`${url}currencies?type=fiat&api_key=${api_key}`),
+    ])
+    .then(
+      axios.spread((...responses) => {
+        // const reqCurrency = req.params.reqCurr
+        const currencyVal = responses[0].data.response;
+        const currencyInfo =
+          responses[1].data.response.fiats[req.params.reqCurr.toUpperCase()];
+
+        res.send({ val: currencyVal, info: currencyInfo });
+      })
+    );
+
+  //   await axios
+  //     .get(
+  //       `${url}latest?base=SGD&symbols=${req.params.reqCurr}&api_key=${api_key}`
+  //     )
+  //     .then((response) => {
+  //       res.send(response.data);
+  //     });
 });
 
 router.get("/:reqCurr/history", async (req, res) => {
   //get hisotry of specified currency (only for three days for now)
   await axios
     .all([
-      axios.get(
-        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2020-04-15&api_key=${api_key}`
+      await axios.get(
+        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2021-04-15&api_key=${api_key}`
       ),
-      axios.get(
-        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2020-04-16&api_key=${api_key}`
+      await axios.get(
+        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2021-04-16&api_key=${api_key}`
       ),
-      axios.get(
-        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2020-04-17&api_key=${api_key}`
+      await axios.get(
+        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2021-04-17&api_key=${api_key}`
       ),
     ])
     .then(
