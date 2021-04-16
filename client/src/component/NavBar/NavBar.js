@@ -10,6 +10,7 @@ import {
   NavbarBrand,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const NavBar = () => {
@@ -33,6 +34,7 @@ const NavBar = () => {
           </NavDropdown>
         </Nav>
         <div className="mr-sm-2">Base</div>
+        <SearchBar></SearchBar>
       </Navbar.Collapse>
     </Navbar>
   );
