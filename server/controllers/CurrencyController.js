@@ -11,17 +11,28 @@ const url = "https://api.currencyscoop.com/v1/";
 
 router.get("/", async (req, res) => {
   // get all currencies
-
   //   console.log(req.query);
   await axios
-    .get(`${url}latest?base=${req.query.baseCurr}&api_key=${api_key}`)
-    .then((response) => {
-      if (response) {
-        res.status(StatusCodes.OK).send(response.data);
-      } else {
-        res.status(StatusCodes.BAD_REQUEST).send("Unknown Error");
-      }
-    })
+    .all([
+      await axios.get(`${url}latest?base=SGD&api_key=${api_key}`),
+      await axios.get(`${url}currencies?type=fiat&api_key=${api_key}`),
+    ])
+    .then(
+      axios.spread((...responses) => {
+        // const reqCurrency = req.params.reqCurr
+        const currencyVal = responses[0].data.response.rates;
+        const currencyInfo = responses[1].data.response.fiats;
+        for (const prop in currencyInfo) {
+          const currency = currencyInfo[`${prop}`];
+          currency.rate = currencyVal[prop];
+        }
+        if (currencyInfo) {
+          res.status(StatusCodes.OK).send(currencyInfo);
+        } else {
+          res.status(StatusCodes.NOT_FOUND).send("Error, no such currency");
+        }
+      })
+    )
     .catch((error) => {
       res.status(StatusCodes.BAD_REQUEST).send(error);
     });
@@ -33,7 +44,7 @@ router.get("/:reqCurr", async (req, res) => {
   await axios
     .all([
       await axios.get(
-        `${url}latest?base=${req.body.baseCurr}&symbols=${req.params.reqCurr}&api_key=${api_key}`
+        `${url}latest?base=${req.query.baseCurr}&symbols=${req.params.reqCurr}&api_key=${api_key}`
       ),
       await axios.get(`${url}currencies?type=fiat&api_key=${api_key}`),
     ])

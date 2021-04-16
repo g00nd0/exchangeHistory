@@ -22,30 +22,27 @@ const CurrencyView = () => {
 
   useEffect(() => {
     axios.get(`/api/forex?baseCurr=${baseCurr}`).then((response) => {
-      setCurrencyInfo(response.data.response);
+      setCurrencyInfo(response.data);
+      console.log("this runs");
     });
   }, [baseCurr]);
 
   return (
     <div className="container">
       <div className="row">
+        {/* {console.log(currencyInfo)} */}
         {currencyInfo ? (
-          Object.keys(currencyInfo.rates).map((currency, i) => {
+          Object.keys(currencyInfo).map((currency, i) => {
             return (
               <div key={currency} id="currencyCard" className="col-xs-1">
-                {currencyInfo.rates[currency]} - {currency},
+                {currency} - {currencyInfo[`${currency}`].currency_name} -{" "}
+                {currencyInfo[`${currency}`].rate},
               </div>
             );
           })
         ) : (
-          <p>data loading</p>
+          <p>Loading Data...</p>
         )}
-        {/* {console.log(currencyInfo)} */}
-        {/* {this.state.films.map(film => (
-      <div key={film.id} id='cardItem' className="col-xs-1">
-        <MovieCard film={film} />
-      </div>
-    ))} */}
       </div>
     </div>
   );
