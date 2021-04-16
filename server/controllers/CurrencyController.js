@@ -37,39 +37,55 @@ router.get("/:reqCurr", async (req, res) => {
         res.send({ val: currencyVal, info: currencyInfo });
       })
     );
-
-  //   await axios
-  //     .get(
-  //       `${url}latest?base=SGD&symbols=${req.params.reqCurr}&api_key=${api_key}`
-  //     )
-  //     .then((response) => {
-  //       res.send(response.data);
-  //     });
 });
 
 router.get("/:reqCurr/history", async (req, res) => {
   //get hisotry of specified currency (only for three days for now)
-  await axios
-    .all([
-      await axios.get(
-        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2021-04-15&api_key=${api_key}`
-      ),
-      await axios.get(
-        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2021-04-16&api_key=${api_key}`
-      ),
-      await axios.get(
-        `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=2021-04-17&api_key=${api_key}`
-      ),
-    ])
-    .then(
-      axios.spread((...responses) => {
-        res.send(
-          responses.map((oneCurrency) => {
-            return oneCurrency.data.response;
-          })
-        );
-      })
+  const timePeriod = 14; // cant display for last 3 days, seems like its because its too soon and data is unavailable, so choose between last 7 and last 14 days
+
+  let axiosList = new Array();
+
+  const today = new Date(Date.now());
+  const month = (month) => {
+    month = month + 1;
+    if (month.toString().length < 2) {
+      return `0${month}`;
+    }
+    return `${month}`;
+  };
+
+  const day = (day) => {
+    if (day.toString().length < 2) {
+      return `0${day}`;
+    }
+    return `${day}`;
+  };
+
+  const date = (i) => {
+    return `${today.getFullYear()}-${month(today.getMonth())}-${day(
+      today.getDate() - i
+    )}}`;
+  };
+
+  const axiosCmd = (inputDate) => {
+    return axios.get(
+      `${url}historical?base=SGD&symbols=${req.params.reqCurr}&date=${inputDate}&api_key=${api_key}`
     );
+  };
+
+  for (let i = 0; i < timePeriod; i++) {
+    axiosList.push(axiosCmd(date(i)));
+  }
+
+  await axios.all(axiosList).then(
+    axios.spread((...responses) => {
+      res.send(
+        responses.map((oneCurrency) => {
+          return oneCurrency.data.response;
+        })
+      );
+    })
+  );
 });
 
 module.exports = router;
