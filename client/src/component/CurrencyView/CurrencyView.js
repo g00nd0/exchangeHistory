@@ -34,10 +34,15 @@ const CurrencyView = () => {
         {currencyInfo ? (
           Object.keys(currencyInfo).map((currency, i) => {
             return (
-              <div key={currency} id="currencyCard" className="col-xs-1">
+              <Button
+                variant="light"
+                key={currency}
+                id="currencyCard"
+                className="col-xs-1"
+              >
                 {currency} - {currencyInfo[`${currency}`].currency_name} -{" "}
                 {currencyInfo[`${currency}`].rate},
-              </div>
+              </Button>
             );
           })
         ) : (
