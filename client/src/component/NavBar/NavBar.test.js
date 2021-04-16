@@ -12,3 +12,9 @@ test("Render Button for Currencies", () => {
   const linkElement = screen.getByText("Currencies");
   expect(linkElement).toBeInTheDocument();
 });
+
+test("Render Dropdown menu for Base Currency Select", () => {
+  render(<NavBar />);
+  const linkElement = screen.getByText("Base");
+  expect(linkElement).toBeInTheDocument();
+});
