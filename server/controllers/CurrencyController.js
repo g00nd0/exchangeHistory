@@ -11,8 +11,10 @@ const url = "https://api.currencyscoop.com/v1/";
 
 router.get("/", async (req, res) => {
   // get all currencies
+
+  //   console.log(req.query);
   await axios
-    .get(`${url}latest?base=${req.body.baseCurr}&api_key=${api_key}`)
+    .get(`${url}latest?base=${req.query.baseCurr}&api_key=${api_key}`)
     .then((response) => {
       if (response) {
         res.status(StatusCodes.OK).send(response.data);
