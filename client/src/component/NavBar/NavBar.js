@@ -1,15 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Navbar,
-  Nav,
-  Button,
-  Col,
-  Form,
-  FormControl,
-  NavDropdown,
-  NavbarBrand,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Navbar, Nav } from "react-bootstrap";
 import SearchBar from "../SearchBar/SearchBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -28,8 +18,6 @@ const NavBar = (props) => {
           baseCurr={props.baseCurr}
           setBaseCurr={props.setBaseCurr}
         />
-
-        {console.log(props.currencyInfo)}
       </Navbar.Collapse>
     </Navbar>
   );

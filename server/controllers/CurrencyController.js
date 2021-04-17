@@ -11,7 +11,6 @@ const url = "https://api.currencyscoop.com/v1/";
 
 router.get("/", async (req, res) => {
   // get all currencies
-  //   console.log(req.query);
   await axios
     .all([
       await axios.get(
@@ -51,8 +50,6 @@ router.get("/:reqCurr", async (req, res) => {
     ])
     .then(
       axios.spread((...responses) => {
-        // const reqCurrency = req.params.reqCurr
-
         const currencyVal = responses[0].data.response;
         const currencyInfo =
           responses[1].data.response.fiats[req.params.reqCurr.toUpperCase()];
@@ -74,7 +71,7 @@ router.get("/:reqCurr", async (req, res) => {
 router.get("/:reqCurr/history", async (req, res) => {
   // ideally, this implementation should use the "timeseries" parameter specified in currencyscoop's documentation, but this requires a paid subscription
   //get hisotry of specified currency (only for three days for now)
-  const timePeriod = 7; // cant display for last 3 days depending on requested currency, seems like its because its too soon and data is unavailable
+  const timePeriod = 7;
 
   let axiosList = new Array();
 

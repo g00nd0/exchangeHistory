@@ -3,12 +3,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "./component/NavBar/NavBar";
 import CurrencyView from "./component/CurrencyView/CurrencyView";
 import CurrencyViewOne from "./component/CurrencyView/ViewOne/CurrencyViewOne";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 
 function App() {
@@ -19,7 +14,6 @@ function App() {
   useEffect(() => {
     axios.get(`/api/forex?baseCurr=${baseCurr}`).then((response) => {
       setCurrencyInfo(response.data);
-      console.log("app.s");
     });
   }, [baseCurr]);
 
@@ -37,6 +31,7 @@ function App() {
               baseCurr={baseCurr}
               setBaseCurr={setBaseCurr}
               setReqCurr={setReqCurr}
+              currencyInfo={currencyInfo}
             />
           </Route>
           <Route exact path="/:reqCurr">

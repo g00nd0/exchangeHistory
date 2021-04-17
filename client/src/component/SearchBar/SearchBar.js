@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,25 +14,26 @@ const SearchBar = (props) => {
         }}
       >
         {list.map((option, i) => {
-          return <Dropdown.Item>{list[i]}</Dropdown.Item>;
+          return (
+            <Dropdown.Item
+              onClick={() => {
+                handleClick(list[i]);
+              }}
+            >
+              {list[i]}
+            </Dropdown.Item>
+          );
         })}
       </Dropdown.Menu>
     );
   };
 
-  // const options = codeList().map((option) => {
-  //   return { value: option, label: option };
-  // });
-  // const options = [
-  //   { value: "chocolate", label: "Chocolate" },
-  //   { value: "strawberry", label: "Strawberry" },
-  //   { value: "vanilla", label: "Vanilla" },
-  // ];
-  const [selectedOption, setSelectedOption] = useState(props.baseCurr);
+  const handleClick = (selectedItem) => {
+    setSelectedOption(selectedItem);
+    props.setBaseCurr(selectedItem);
+  };
 
-  // const handleCurrencyChoice = (choice) => {
-  //   setSelectedOption(options[choice]);
-  // };
+  const [selectedOption, setSelectedOption] = useState(props.baseCurr);
 
   return (
     <>

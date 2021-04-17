@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Buttons } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import getSymbolFromCurrency from "currency-symbol-map";
 import "bootstrap/dist/css/bootstrap.min.css";
