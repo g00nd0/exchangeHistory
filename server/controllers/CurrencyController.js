@@ -14,7 +14,9 @@ router.get("/", async (req, res) => {
   //   console.log(req.query);
   await axios
     .all([
-      await axios.get(`${url}latest?base=SGD&api_key=${api_key}`),
+      await axios.get(
+        `${url}latest?base=${req.query.baseCurr}&api_key=${api_key}`
+      ),
       await axios.get(`${url}currencies?type=fiat&api_key=${api_key}`),
     ])
     .then(
@@ -100,7 +102,7 @@ router.get("/:reqCurr/history", async (req, res) => {
 
   const axiosCmd = (inputDate) => {
     return axios.get(
-      `${url}historical?base=${req.body.baseCurr}&symbols=${req.params.reqCurr}&date=${inputDate}&api_key=${api_key}`
+      `${url}historical?base=${req.query.baseCurr}&symbols=${req.params.reqCurr}&date=${inputDate}&api_key=${api_key}`
     );
   };
 
