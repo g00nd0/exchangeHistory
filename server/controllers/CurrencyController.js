@@ -19,7 +19,6 @@ router.get("/", async (req, res) => {
     ])
     .then(
       axios.spread((...responses) => {
-        // const reqCurrency = req.params.reqCurr
         const currencyVal = responses[0].data.response.rates;
         const currencyInfo = responses[1].data.response.fiats;
         for (const prop in currencyInfo) {

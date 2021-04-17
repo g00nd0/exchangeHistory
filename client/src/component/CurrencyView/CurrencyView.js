@@ -13,12 +13,30 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Pagination from "react-js-pagination";
 import SearchBar from "../SearchBar/SearchBar";
+import CurrencyCard from "./CurrencyCard/CurrencyCard";
+// import Pagination from "./Pagination/Pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CurrencyView = () => {
   const [currencyInfo, setCurrencyInfo] = useState();
   const [baseCurr, setBaseCurr] = useState("SGD");
+  // const [currencyInfoDisp, setCurrencyInfoDisp] = useState();
+  // const currPerPage = 12;
+  // const [activePage, setCurrentPage] = useState(1);
+
+  // Logic for displaying current todos
+  // const indexOfLastCurr = activePage * currPerPage;
+  // const indexOfFirstCurr = indexOfLastCurr - currPerPage;
+  // const currentCurr = (currInfo) => {
+  //   return currInfo.slice(indexOfFirstCurr, indexOfLastCurr);
+  // };
+
+  // const handlePageChange = (pageNumber) => {
+  //   console.log(`active page is ${pageNumber}`);
+  //   setCurrentPage(pageNumber);
+  // };
 
   useEffect(() => {
     axios.get(`/api/forex?baseCurr=${baseCurr}`).then((response) => {
@@ -30,19 +48,15 @@ const CurrencyView = () => {
   return (
     <div className="container">
       <div className="row">
-        {/* {console.log(currencyInfo)} */}
         {currencyInfo ? (
           Object.keys(currencyInfo).map((currency, i) => {
-            return (
-              <Button
-                variant="light"
+            return currencyInfo[`${currency}`].rate ? (
+              <CurrencyCard
                 key={currency}
-                id="currencyCard"
-                className="col-xs-1"
-              >
-                {currency} - {currencyInfo[`${currency}`].currency_name} -{" "}
-                {currencyInfo[`${currency}`].rate},
-              </Button>
+                currencyInfo={currencyInfo[`${currency}`]}
+              />
+            ) : (
+              <></>
             );
           })
         ) : (
