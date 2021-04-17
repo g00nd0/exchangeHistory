@@ -22,6 +22,7 @@ function App() {
   return (
     <div title="Current-See App" className="App">
       <NavBar
+        title="navbar"
         baseCurr={baseCurr}
         setBaseCurr={setBaseCurr}
         currencyInfo={currencyInfo}
@@ -30,6 +31,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <CurrencyView
+              title="CurrencyView"
               baseCurr={baseCurr}
               setBaseCurr={setBaseCurr}
               setReqCurr={setReqCurr}
@@ -37,7 +39,11 @@ function App() {
             />
           </Route>
           <Route exact path="/:reqCurr">
-            <CurrencyViewOne baseCurr={baseCurr} reqCurr={reqCurr} />
+            <CurrencyViewOne
+              title="ViewOne"
+              baseCurr={baseCurr}
+              reqCurr={reqCurr}
+            />
           </Route>
         </Switch>
       </Router>
