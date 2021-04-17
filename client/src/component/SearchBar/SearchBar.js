@@ -1,31 +1,52 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 import { Dropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-const SearchBar = () => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-  const [selectedOption, setSelectedOption] = useState(options[0]);
 
-  const handleCurrencyChoice = (choice) => {
-    setSelectedOption(options[choice]);
+const SearchBar = (props) => {
+  const codeList = (info) => {
+    const list = Object.keys(info);
+    return (
+      <Dropdown.Menu
+        style={{
+          height: "300px",
+          "overflow-y": "scroll",
+          "margin-left": "-80px",
+        }}
+      >
+        {list.map((option, i) => {
+          return <Dropdown.Item>{list[i]}</Dropdown.Item>;
+        })}
+      </Dropdown.Menu>
+    );
   };
 
-  return (
-    <Dropdown title="dropdown for base currency">
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        {selectedOption.value}
-      </Dropdown.Toggle>
+  // const options = codeList().map((option) => {
+  //   return { value: option, label: option };
+  // });
+  // const options = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" },
+  // ];
+  const [selectedOption, setSelectedOption] = useState(props.baseCurr);
 
-      <Dropdown.Menu>
-        <Dropdown.Item>{options[0].value}</Dropdown.Item>
-        <Dropdown.Item>{options[1].value}</Dropdown.Item>
-        <Dropdown.Item>{options[2].value}</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+  // const handleCurrencyChoice = (choice) => {
+  //   setSelectedOption(options[choice]);
+  // };
+
+  return (
+    <>
+      {props.currencyInfo ? (
+        <Dropdown title="dropdown for base currency">
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            {selectedOption}
+          </Dropdown.Toggle>
+          {codeList(props.currencyInfo)}
+        </Dropdown>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </>
   );
 };
 
