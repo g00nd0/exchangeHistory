@@ -9,13 +9,14 @@ const SearchBar = (props) => {
       <Dropdown.Menu
         style={{
           height: "300px",
-          "overflow-y": "scroll",
-          "margin-left": "-80px",
+          overflowY: "scroll",
+          marginLeft: "-80px",
         }}
       >
         {list.map((option, i) => {
           return (
             <Dropdown.Item
+              key={list[i]}
               onClick={() => {
                 handleClick(list[i]);
               }}
@@ -30,6 +31,7 @@ const SearchBar = (props) => {
 
   const handleClick = (selectedItem) => {
     setSelectedOption(selectedItem);
+    localStorage.setItem("baseCurr", selectedItem);
     props.setBaseCurr(selectedItem);
   };
 

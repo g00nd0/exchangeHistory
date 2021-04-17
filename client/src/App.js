@@ -6,8 +6,10 @@ import CurrencyViewOne from "./component/CurrencyView/ViewOne/CurrencyViewOne";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 
+localStorage.setItem("baseCurr", "USD");
+
 function App() {
-  const [baseCurr, setBaseCurr] = useState("USD");
+  const [baseCurr, setBaseCurr] = useState(localStorage.getItem("baseCurr"));
   const [reqCurr, setReqCurr] = useState("");
   const [currencyInfo, setCurrencyInfo] = useState();
 
@@ -15,7 +17,7 @@ function App() {
     axios.get(`/api/forex?baseCurr=${baseCurr}`).then((response) => {
       setCurrencyInfo(response.data);
     });
-  }, [baseCurr]);
+  }, [baseCurr, localStorage.getItem("baseCurr")]);
 
   return (
     <div title="Current-See App" className="App">
