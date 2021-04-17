@@ -82,7 +82,7 @@ class Pagination extends Component {
     const pages = this.fetchPageNumbers();
 
     return (
-      <Fragment>
+      <Fragment title="pagination">
         <nav aria-label="Currency Pagination">
           <ul className="pagination">
             {pages.map((page, index) => {

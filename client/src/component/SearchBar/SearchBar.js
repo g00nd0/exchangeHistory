@@ -7,6 +7,7 @@ const SearchBar = (props) => {
     const list = Object.keys(info);
     return (
       <Dropdown.Menu
+        title="dropdownMenu"
         style={{
           height: "300px",
           overflowY: "scroll",
@@ -41,7 +42,11 @@ const SearchBar = (props) => {
     <>
       {props.currencyInfo ? (
         <Dropdown title="dropdown for base currency">
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown.Toggle
+            title="dropdownSelected"
+            variant="success"
+            id="dropdown-basic"
+          >
             {selectedOption}
           </Dropdown.Toggle>
           {codeList(props.currencyInfo)}

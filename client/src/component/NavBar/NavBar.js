@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const NavBar = (props) => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar title="navbar" bg="light" expand="lg">
       <Navbar.Brand href="/">Current-See</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -14,6 +14,7 @@ const NavBar = (props) => {
         </Nav>
         <div className="mr-sm-2">Base Currency</div>
         <SearchBar
+          title="searchBar"
           currencyInfo={props.currencyInfo}
           baseCurr={props.baseCurr}
           setBaseCurr={props.setBaseCurr}

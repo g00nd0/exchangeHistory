@@ -12,13 +12,11 @@ const CurrencyViewOne = (props) => {
     setHistoryLength(num);
   };
 
-  const getInfo = async () => {
+  const getInfo = async (reqCurr, baseCurr) => {
     await axios
       .all([
-        axios.get(`/api/forex/${props.reqCurr}?baseCurr=${props.baseCurr}`),
-        axios.get(
-          `/api/forex/${props.reqCurr}/history?baseCurr=${props.baseCurr}`
-        ),
+        axios.get(`/api/forex/${reqCurr}?baseCurr=${baseCurr}`),
+        axios.get(`/api/forex/${reqCurr}/history?baseCurr=${baseCurr}`),
       ])
       .then(
         axios.spread((...responses) => {
@@ -32,16 +30,17 @@ const CurrencyViewOne = (props) => {
   };
 
   useEffect(() => {
-    getInfo();
-  }, [props.reqCurr]);
+    getInfo(props.reqCurr, props.baseCurr);
+  }, [props.reqCurr, props.baseCurr]);
 
   return (
-    <div>
+    <div title="viewOneMain">
       {reqCurrInfo ? (
         <>
-          <h1>{reqCurrInfo.info.info.currency_code}</h1>
-          <h2>{reqCurrInfo.info.info.currency_name}</h2>
+          <h1 title="currencyCode">{reqCurrInfo.info.info.currency_code}</h1>
+          <h2 title="currencyName">{reqCurrInfo.info.info.currency_name}</h2>
           <Button
+            title="getToday"
             onClick={() => {
               handleClick(1);
             }}
@@ -49,6 +48,7 @@ const CurrencyViewOne = (props) => {
             Today
           </Button>
           <Button
+            title="get3Days"
             onClick={() => {
               handleClick(3);
             }}
@@ -56,6 +56,7 @@ const CurrencyViewOne = (props) => {
             Last 3 Days
           </Button>
           <Button
+            title="get7Days"
             onClick={() => {
               handleClick(7);
             }}
@@ -63,6 +64,7 @@ const CurrencyViewOne = (props) => {
             Last 7 Days
           </Button>
           <Table
+            title="currencyTable"
             striped
             bordered
             hover

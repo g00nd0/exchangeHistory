@@ -5,10 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const CurrencyView = (props) => {
   return (
     <>
-      <h1>Selct a currency below</h1>
+      <h1 title="instruction">Selct a currency below</h1>
       <br />
-      <div className="container">
-        <div className="row">
+      <div title="container" className="container">
+        <div title="renderCards" className="row">
           {props.currencyInfo ? (
             Object.keys(props.currencyInfo).map((currency, i) => {
               return props.currencyInfo[`${currency}`].rate ? (
