@@ -28,6 +28,19 @@ Application is separated into two folders, `client/` and `server/`, for better o
 - Axios is used as the middleware to make the API calls. As some the Axios calls require multiple concurrent API calls to the CurrencyScoop API, `axios.all()` and `axios.spread()` is used for all CurrencyController endpoints for the app.
 - Further info on CurrencyController endpoints can be found below, under **API Endpoints**
 
+## API Endpoints
+
+1. **GET**
+   Endpoint: `"/api/forex/?baseCurr=..."`
+   Gets the latest currencies, based on the specified base currency, `baseCurr`.
+2. **GET**
+   Endpoint: `"/api/forex/:reqCurr/"`
+   Gets the specified currency, `reqCurr`, along with relevant currency info.
+
+3. **GET**
+   Endpoint: `"/api/forex/:reqCurr/history?baseCurr=..."`
+   Gets the specified currency, `reqCurr`, with its historical currency, up to 7 days prior, based on the specified base currency, `baseCurr`.
+
 ## Remarks
 
 1. Would have liked to add some form of pagination for the CurrencyView component, but due to time and complexity, this was left out.
@@ -45,19 +58,6 @@ Application is separated into two folders, `client/` and `server/`, for better o
 7. Attempted test-driven development initially, however, due to time constraints and my limited knowledge and practice, I proceeded with creating the application first. I understand this is pretty much the opposite of what TDD is, but my main aim was to at least have a working app.
 
 8. I'm not well-versed with e2e testing, as such it was not implemented here. However, I am aware that Cypress is one such framework that can be used for such cases. With further reading and practice, I aim to improve my knowledge in e2e testing.
-
-## API Endpoints
-
-1. **GET**
-   Endpoint: `"/api/forex/?baseCurr=..."`
-   Gets the latest currencies, based on the specified base currency, `baseCurr`.
-2. **GET**
-   Endpoint: `"/api/forex/:reqCurr/"`
-   Gets the specified currency, `reqCurr`, along with relevant currency info.
-
-3. **GET**
-   Endpoint: `"/api/forex/:reqCurr/history?baseCurr=..."`
-   Gets the specified currency, `reqCurr`, with its historical currency, up to 7 days prior, based on the specified base currency, `baseCurr`.
 
 ## Setup and Run App
 
