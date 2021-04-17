@@ -10,14 +10,14 @@ Application is separated into two folders, **client** and **server**, for better
 
 - Main source code is located in **src/** directory. **App.js** resides in the root of this folder.
 - Components are located in the **component/** folder, and are organized into three subfolders:
-  i) **CurrencyView**
-  ii) **NavBar**
-  iii) **SearchBar**
+  - **CurrencyView**
+  - **NavBar**
+  - **SearchBar**
 - **CurrencyView** has been further compartmentalized as:
-  i) In the root of **CurrencyView/**, the main component and its test file reside here. CurrencyView.js renders all the available currencies on the frontend, allows users to click on the desired **CurrencyCard**
-  ii) **CurrencyCard** is rendered in CurrencyView, and displays basic information on each currency, including its currency code, full name and latest rates.
-  iii) **ViewOne** shows relevant currency info for the requested forex, with its rates based on the base currency specified by the user. The user can also select the number of days to view historical currency rates, up to 7 days.
-  iv) **Pagination** was attempted, but due to the amount of time available and complexity, opted not to include in the main application, but can be revisited as a new feature.
+  - In the root of **CurrencyView/**, the main component and its test file reside here. CurrencyView.js renders all the available currencies on the frontend, allows users to click on the desired **CurrencyCard**
+  - **CurrencyCard** is rendered in CurrencyView, and displays basic information on each currency, including its currency code, full name and latest rates.
+  - **ViewOne** shows relevant currency info for the requested forex, with its rates based on the base currency specified by the user. The user can also select the number of days to view historical currency rates, up to 7 days.
+  - **Pagination** was attempted, but due to the amount of time available and complexity, opted not to include in the main application, but can be revisited as a new feature.
 - **Navbar** Contains the main link to the home page, meaning the CurrencyView page, as well as gives users the option to change the base currency. This persists across the CurrencyView page and the CurrencyViewOne component
 - **SearchBar** is the component used to specify the base currency, residing in the Navbar allows the user to switch base currencies on the fly
 
