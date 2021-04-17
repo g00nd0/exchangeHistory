@@ -7,23 +7,26 @@ Forex checking app, using Create-react-app, ExpressJS, and CurrencyScoop API
 Application is separated into two folders, **client** and **server**, for better organization.
 
 1. Client App (React, Create-React-App)
-   a) Main source code is located in **src/** directory. **App.js** resides in the root of this folder.
-   b) Components are located in the **component/** folder, and are organized into three subfolders:
-   i) **CurrencyView**
-   ii) **NavBar**
-   iii) **SearchBar**
-   c) **CurrencyView** has been further compartmentalized as:
-   i) In the root of **CurrencyView/**, the main component and its test file reside here. CurrencyView.js renders all the available currencies on the frontend, allows users to click on the desired **CurrencyCard**
-   ii) **CurrencyCard** is rendered in CurrencyView, and displays basic information on each currency, including its currency code, full name and latest rates.
-   iii) **ViewOne** shows relevant currency info for the requested forex, with its rates based on the base currency specified by the user. The user can also select the number of days to view historical currency rates, up to 7 days.
-   iv) **Pagination** was attempted, but due to the amount of time available and complexity, opted not to include in the main application, but can be revisited as a new feature.
-   d) **Navbar** Contains the main link to the home page, meaning the CurrencyView page, as well as gives users the option to change the base currency. This persists across the CurrencyView page and the CurrencyViewOne component
-   e) **SearchBar** is the component used to specify the base currency, residing in the Navbar allows the user to switch base currencies on the fly
+
+- Main source code is located in **src/** directory. **App.js** resides in the root of this folder.
+- Components are located in the **component/** folder, and are organized into three subfolders:
+  i) **CurrencyView**
+  ii) **NavBar**
+  iii) **SearchBar**
+- **CurrencyView** has been further compartmentalized as:
+  i) In the root of **CurrencyView/**, the main component and its test file reside here. CurrencyView.js renders all the available currencies on the frontend, allows users to click on the desired **CurrencyCard**
+  ii) **CurrencyCard** is rendered in CurrencyView, and displays basic information on each currency, including its currency code, full name and latest rates.
+  iii) **ViewOne** shows relevant currency info for the requested forex, with its rates based on the base currency specified by the user. The user can also select the number of days to view historical currency rates, up to 7 days.
+  iv) **Pagination** was attempted, but due to the amount of time available and complexity, opted not to include in the main application, but can be revisited as a new feature.
+- **Navbar** Contains the main link to the home page, meaning the CurrencyView page, as well as gives users the option to change the base currency. This persists across the CurrencyView page and the CurrencyViewOne component
+- **SearchBar** is the component used to specify the base currency, residing in the Navbar allows the user to switch base currencies on the fly
+
 2. Server App (ExpressJS)
-   a) **CurrencyController** router contains the API endpoints. The endpoints use API calls specified in the CurrencyScoop API documentation
-   b) A .env file is used to hold the API key required to used CurrencyScoop's API
-   c) Axios is used as the middleware to make the API calls. As some the Axios calls require multiple concurrent API calls to the CurrencyScoop API, axios.all() and axios.spread() is used for all CurrencyController endpoints for the app.
-   d) Further info on CurrencyController endpoints can be found below, under **API Endpoints**
+
+- **CurrencyController** router contains the API endpoints. The endpoints use API calls specified in the CurrencyScoop API documentation
+- A .env file is used to hold the API key required to used CurrencyScoop's API
+- Axios is used as the middleware to make the API calls. As some the Axios calls require multiple concurrent API calls to the CurrencyScoop API, axios.all() and axios.spread() is used for all CurrencyController endpoints for the app.
+- Further info on CurrencyController endpoints can be found below, under **API Endpoints**
 
 ## Remarks
 
