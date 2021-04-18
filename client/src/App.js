@@ -20,7 +20,7 @@ function App() {
     axios.get(`/api/forex?baseCurr=${baseCurr}`).then((response) => {
       setCurrencyInfo(response.data);
     });
-  }, [baseCurr, localStorage.getItem("baseCurr")]);
+  }, [baseCurr]);
 
   return (
     <div title="Current-See App" className="App">
