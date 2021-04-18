@@ -12,6 +12,8 @@ const CurrencyViewOne = (props) => {
     setHistoryLength(num);
   };
 
+  const setLatestHistory = (val) => {};
+
   const getInfo = async (reqCurr, baseCurr) => {
     await axios
       .all([
@@ -24,6 +26,8 @@ const CurrencyViewOne = (props) => {
             info: responses[0].data,
             history: responses[1].data,
           };
+          responseData.history[0].rates[reqCurr] =
+            responseData.info.val.rates[reqCurr];
           setReqCurrInfo(responseData);
         })
       );
@@ -35,6 +39,7 @@ const CurrencyViewOne = (props) => {
 
   return (
     <div title="viewOneMain">
+      {console.log(reqCurrInfo)}
       {reqCurrInfo ? (
         <>
           <h1 title="currencyCode">{reqCurrInfo.info.info.currency_code}</h1>
