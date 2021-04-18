@@ -39,7 +39,6 @@ const CurrencyViewOne = (props) => {
 
   return (
     <div title="viewOneMain">
-      {console.log(reqCurrInfo)}
       {reqCurrInfo ? (
         <>
           <h1 title="currencyCode">{reqCurrInfo.info.info.currency_code}</h1>
