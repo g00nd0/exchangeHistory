@@ -6,7 +6,10 @@ import CurrencyViewOne from "./component/CurrencyView/ViewOne/CurrencyViewOne";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 
-localStorage.setItem("baseCurr", "USD");
+if (!localStorage.getItem("baseCurr")) {
+  //if no baseCurr in local storage
+  localStorage.setItem("baseCurr", "USD");
+}
 
 function App() {
   const [baseCurr, setBaseCurr] = useState(localStorage.getItem("baseCurr"));
