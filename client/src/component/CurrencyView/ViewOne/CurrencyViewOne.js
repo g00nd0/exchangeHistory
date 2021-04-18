@@ -12,8 +12,6 @@ const CurrencyViewOne = (props) => {
     setHistoryLength(num);
   };
 
-  const setLatestHistory = (val) => {};
-
   const getInfo = async (reqCurr, baseCurr) => {
     await axios
       .all([
